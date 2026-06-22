@@ -3,183 +3,135 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A responsive Solo Leveling-inspired calorie calculator." />
-  <title>WyatttHQ | Calorie System</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Calorie System | Wyatt HQ</title>
+  <link rel="stylesheet" href="css/Cstyle.css" />
 </head>
-<body class="calculator-system-page">
-  <div class="page-glow glow-one"></div>
-  <div class="page-glow glow-two"></div>
+<body>
 
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="WyatttHQ home">
-      <span class="brand-mark">WH</span>
-      <span>WyatttHQ<span class="brand-dot">.</span></span>
-    </a>
+  <header class="navbar">
+    <div class="logo">WYATT<span>HQ</span></div>
 
-    <button class="menu-button" id="menuButton" aria-label="Open navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-      <a class="nav-link" href="index.html">Home</a>
-      <a class="nav-link active" href="calculator.html">CALORIE SYSTEM</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="calculator.html" class="active">Calorie System</a>
+      <a href="sale.html">For Sale</a>
       <a class="nav-link social-link" href="https://www.instagram.com/wyattt.hq/" target="_blank" rel="noreferrer">INSTAGRAM ↗</a>
       <a class="nav-link social-link" href="https://www.tiktok.com/@wyattt.hq" target="_blank" rel="noreferrer">TIKTOK ↗</a>
     </nav>
   </header>
 
-  <main>
-    <section class="page-section calculator-page" id="calculator">
-      <div class="calculator-page-header">
-        <div class="calculator-intro">
-          <p class="eyebrow"><span class="status-dot"></span> SYSTEM WINDOW OPEN</p>
-          <h1>CALORIE<br /><span>CALCULATOR.</span></h1>
-          <p>Set your player data, choose your objective, and get a daily calorie target you can use as a starting point.</p>
+  <main class="calculator-page">
+
+    <section class="calculator-hero">
+      <div>
+        <p class="system-label">SYSTEM WINDOW</p>
+        <h1>Macro Calculator</h1>
+        <p>
+          Choose your goal and macro style. This system gives you daily calories,
+          protein, carbs, and fat to help you rank up.
+        </p>
+      </div>
+    </section>
+
+    <section class="calculator-box">
+
+      <div class="form-grid">
+
+        <div class="form-control">
+          <label>Age</label>
+          <input type="number" id="age" value="32" />
         </div>
 
-        <aside class="system-file-card" aria-label="Calorie system summary">
-          <span class="system-file-label">SYSTEM FILE 01</span>
-          <strong>NUTRITION<br />PROTOCOL</strong>
-          <p>Calories are a tool. Your weekly trend decides whether the plan is working.</p>
-          <a href="#calculatorForm">BEGIN SCAN <span>↓</span></a>
-        </aside>
+        <div class="form-control">
+          <label>Gender</label>
+          <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+
+        <div class="form-control">
+          <label>Height Feet</label>
+          <input type="number" id="feet" value="5" />
+        </div>
+
+        <div class="form-control">
+          <label>Height Inches</label>
+          <input type="number" id="inches" value="10" />
+        </div>
+
+        <div class="form-control">
+          <label>Weight Pounds</label>
+          <input type="number" id="weight" value="165" />
+        </div>
+
+        <div class="form-control">
+          <label>Activity Level</label>
+          <select id="activity">
+            <option value="1.2">Little exercise</option>
+            <option value="1.375">Light exercise 1-3 days/week</option>
+            <option value="1.55" selected>Moderate exercise 4-5 days/week</option>
+            <option value="1.725">Hard exercise 6-7 days/week</option>
+            <option value="1.9">Very hard exercise</option>
+          </select>
+        </div>
+
+        <div class="form-control">
+          <label>Goal</label>
+          <select id="goal">
+            <option value="maintain">Maintain Weight</option>
+            <option value="cut" selected>Cut Fat</option>
+            <option value="bulk">Lean Bulk</option>
+          </select>
+        </div>
+
       </div>
 
-      <div class="calculator-layout">
-        <form class="calculator-form" id="calorieForm">
-          <div class="form-title-row">
-            <div>
-              <p class="small-label">PLAYER DATA</p>
-              <h2>SET YOUR STATS</h2>
-            </div>
-            <span class="form-level">CAL</span>
+      <button class="calculate-btn" onclick="calculateCalories()">Calculate</button>
+
+      <div class="result-box">
+
+        <h2>Result</h2>
+
+        <div class="calorie-result">
+          <p>Daily Calories</p>
+          <h3 id="caloriesResult">---</h3>
+        </div>
+
+        <div class="macro-tabs">
+          <button class="macro-tab active" onclick="changeMacro('balanced', this)">Balanced</button>
+          <button class="macro-tab" onclick="changeMacro('lowFat', this)">Low Fat</button>
+          <button class="macro-tab" onclick="changeMacro('lowCarb', this)">Low Carb</button>
+          <button class="macro-tab" onclick="changeMacro('highProtein', this)">High Protein</button>
+        </div>
+
+        <div class="macro-results">
+
+          <div class="macro-card">
+            <span>Protein</span>
+            <strong id="proteinResult">---</strong>
+            <small>grams/day</small>
           </div>
 
-          <div class="form-grid" id="calculatorForm">
-            <label>
-              Age
-              <input type="number" id="age" min="15" max="80" value="25" required />
-            </label>
-
-            <label>
-              Gender
-              <select id="gender" required>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </label>
-
-            <label>
-              Height (ft)
-              <input type="number" id="heightFeet" min="3" max="8" value="5" required />
-            </label>
-
-            <label>
-              Height (in)
-              <input type="number" id="heightInches" min="0" max="11" value="10" required />
-            </label>
-
-            <label>
-              Weight (lb)
-              <input type="number" id="weight" min="70" max="700" value="165" required />
-            </label>
-
-            <label>
-              Activity
-              <select id="activity" required>
-                <option value="1.2">Low / little exercise</option>
-                <option value="1.375">Light / 1–3 days a week</option>
-                <option value="1.55" selected>Moderate / 3–5 days a week</option>
-                <option value="1.725">High / 6–7 days a week</option>
-                <option value="1.9">Very high / hard training job</option>
-              </select>
-            </label>
+          <div class="macro-card">
+            <span>Carbs</span>
+            <strong id="carbsResult">---</strong>
+            <small>grams/day</small>
           </div>
 
-          <fieldset class="goal-fieldset">
-            <legend>PRIMARY GOAL</legend>
-            <label class="goal-option">
-              <input type="radio" name="goal" value="cut" checked />
-              <span>LOSE FAT</span>
-            </label>
-            <label class="goal-option">
-              <input type="radio" name="goal" value="maintain" />
-              <span>MAINTAIN</span>
-            </label>
-            <label class="goal-option">
-              <input type="radio" name="goal" value="bulk" />
-              <span>BUILD MUSCLE</span>
-            </label>
-          </fieldset>
-
-          <button class="primary-button calculate-button" type="submit">CALCULATE TARGET <span>→</span></button>
-          <p class="form-note">This is an estimate. Use your 2–3 week weight trend to adjust your intake.</p>
-        </form>
-
-        <aside class="results-panel" aria-live="polite">
-          <p class="small-label">SYSTEM RESULT</p>
-          <h2>YOUR DAILY TARGET</h2>
-
-          <div class="result-main">
-            <span id="goalName">FAT-LOSS TARGET</span>
-            <strong><span id="calorieResult">2,100</span> <small>kcal</small></strong>
-            <p id="goalDescription">A steady deficit designed to support fat loss while keeping performance in mind.</p>
+          <div class="macro-card">
+            <span>Fat</span>
+            <strong id="fatResult">---</strong>
+            <small>grams/day</small>
           </div>
 
-          <div class="result-divider"></div>
+        </div>
 
-          <div class="result-list">
-            <div>
-              <span>MAINTENANCE</span>
-              <strong id="maintenanceResult">2,600 kcal</strong>
-            </div>
-            <div>
-              <span>PROTEIN RANGE</span>
-              <strong id="proteinResult">132–165 g</strong>
-            </div>
-            <div>
-              <span>WEEKLY FOCUS</span>
-              <strong id="weeklyFocus">Move with intent</strong>
-            </div>
-          </div>
-
-          <p class="disclaimer">Not medical advice. For health conditions or a history of disordered eating, talk with a qualified clinician or dietitian.</p>
-        </aside>
       </div>
 
-      <section class="system-guide" aria-label="How to use the calorie system">
-        <article>
-          <span>01</span>
-          <h2>START WITH THE TARGET</h2>
-          <p>Follow your target consistently for at least two weeks before judging it.</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h2>TRACK THE WEEK, NOT ONE DAY</h2>
-          <p>Daily scale weight moves around. Use your weekly average to see the real pattern.</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h2>ADJUST WITH PURPOSE</h2>
-          <p>Change your target slowly when your average trend stops matching your goal.</p>
-        </article>
-      </section>
-
-      <section class="calculator-tip">
-        <span class="tip-icon">!</span>
-        <p><strong>Progress rule:</strong> do not change your calories because of one day. Look at your weekly average, training performance, and how your body is responding.</p>
-      </section>
     </section>
-  </main>
 
-  <footer class="site-footer">
-    <p>YOUR PROGRESS IS DEPENDING ON YOU.</p>
-    <div>
-      <a href="https://www.instagram.com/wyattt.hq/" target="_blank" rel="noreferrer">IG</a>
-      <a href="https://www.tiktok.com/@wyattt.hq" target="_blank" rel="noreferrer">TIKTOK</a>
-    </div>
-  </footer>
+  </main>
 
   <script src="script.js"></script>
 </body>
